@@ -20,23 +20,32 @@ public class EducationServlet extends HttpServlet {
     private Gson gson = new Gson();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");
-        EntityManager em = emf.createEntityManager();
-
-       List<Education> educations =em.createQuery("SELECT c FROM Education c",Education.class).getResultList();
-
-
-        String educationsJson = this.gson.toJson(educations);
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
-        out.print(educationsJson);
+
+        String id = request.getParameter("id");
+        if(id==null){
+            List<Education> educations =EducationController.fetchAll();
+            String educationsJson = this.gson.toJson(educations);
+            out.print(educationsJson);
+        }else{
+            int eduId = Integer.parseInt(id);
+            Education edu = EducationController.fetchById(eduId);
+            String jsonResult = this.gson.toJson(edu);
+            out.print(jsonResult);
+        }
         out.flush();
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter out = response.getWriter();
 
+        String name = request.getParameter("name");
+        String description = request.getParameter("description");
+        String image = request.getParameter("image");
+
+        EducationController.createEducation(name,description,image);
+        out.print(name+" "+description);
     }
 }
 

@@ -14,7 +14,7 @@ public class Education {
     private String description;
     private String image;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private List<Course> courses;
 
     // default constructor

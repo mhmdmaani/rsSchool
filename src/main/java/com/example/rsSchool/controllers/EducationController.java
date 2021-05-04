@@ -46,7 +46,15 @@ public  class EducationController {
     public  static List<Education>  fetchAll(){
         EntityManager em = emf.createEntityManager();
         List<Education> educations = em.createQuery("SELECT c FROM Education c",Education.class).getResultList();
+        em.close();
         return educations;
     };
+
+    public static Education fetchById(int id){
+        EntityManager em = emf.createEntityManager();
+        Education education = em.find(com.example.rsSchool.models.Education.class,id);
+        em.close();
+        return education;
+    }
 
 }
