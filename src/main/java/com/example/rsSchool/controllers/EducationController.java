@@ -1,20 +1,18 @@
 package com.example.rsSchool.controllers;
-
 import com.example.rsSchool.models.Education;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
 
-public class EducationController {
+public  class EducationController {
 
     static EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");
 
 
-    public static void createEducation(String name , String description){
+    public static void createEducation(String name , String description,String image){
 
-        Education education = new Education(name,description);
+        Education education = new Education(name,description,image);
 
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -22,13 +20,14 @@ public class EducationController {
         em.getTransaction().commit();
         em.close();
     }
-    public static void updateEducation(int id,String name,String description){
+    public static void updateEducation(int id,String name,String description,String image){
         EntityManager em = emf.createEntityManager();
         Education education = em.find(Education.class,id);
         em.getTransaction().begin();
 
         education.setName(name);
         education.setDescription(description);
+        education.setImage(image);
         em.getTransaction().commit();
         em.close();
     }
@@ -46,7 +45,7 @@ public class EducationController {
 
     public  static List<Education>  fetchAll(){
         EntityManager em = emf.createEntityManager();
-        List<Education> educations = em.createQuery("SELECT c FROM Education c ORDER BY c.id",Education.class).getResultList();
+        List<Education> educations = em.createQuery("SELECT c FROM Education c",Education.class).getResultList();
         return educations;
     };
 

@@ -17,14 +17,15 @@ public class Teacher {
     private String name;
     private String tel;
     private String email;
-
+    private String image;
     @ManyToMany
     private List<Course> courses;
 
-    public Teacher(String name , String tel,String email) {
+    public Teacher(String name , String tel,String email,String image) {
         this.name=name;
         this.tel = tel;
         this.email = email;
+        this.image = image;
         this.courses = new ArrayList<>();
     }
 
@@ -74,5 +75,13 @@ public class Teacher {
     }
     public void removeCourse(Course course){
         this.courses.removeIf(c->c.getId()==course.getId());
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

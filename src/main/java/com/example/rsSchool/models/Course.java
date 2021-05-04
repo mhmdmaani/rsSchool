@@ -12,6 +12,9 @@ public class Course {
     private int id;
     private String name;
     private String description;
+    private String image;
+
+
 
     @ManyToOne
     @JoinColumn(name = "education_id")
@@ -20,10 +23,11 @@ public class Course {
     @ManyToMany
     public List<Teacher> teachers;
 
-    public Course(String name, String description,Education education){
+    public Course(String name, String description,Education education,String image){
         this.name=name;
         this.description = description;
         this.education = education;
+        this.image = image;
         this.teachers = new ArrayList<>();
     }
     public Course(){
@@ -77,5 +81,13 @@ public class Course {
 
     public void removeTeacher(Teacher teacher){
         this.teachers.removeIf(c->c.getId()==teacher.getId());
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

@@ -10,16 +10,17 @@ public class Student {
     private String name;
     private String tel;
     private String email;
-
+    private String image;
     @ManyToOne
     private Education education;
     public Student() {
     }
 
-    public Student(String name, String tel, String email,Education education) {
+    public Student(String name, String tel, String email,String image,Education education) {
         this.name = name;
         this.tel = tel;
         this.email = email;
+        this.image = image;
         this.education = education;
     }
 
@@ -61,5 +62,13 @@ public class Student {
 
     public void setEducation(Education education) {
         this.education = education;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

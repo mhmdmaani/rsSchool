@@ -12,6 +12,7 @@ public class Education {
     private int id;
     private String name;
     private String description;
+    private String image;
 
     @OneToMany
     private List<Course> courses;
@@ -22,9 +23,10 @@ public class Education {
     }
 
     // constructor
-    public Education(String name,String description) {
+    public Education(String name,String description,String image) {
         this.name = name;
         this.description = description;
+        this.image = image;
         this.courses = new ArrayList<>();
     }
 
@@ -68,4 +70,11 @@ public class Education {
         this.courses.removeIf(c->c.getId()==course.getId());
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 }
