@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="rsSchool:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>rsSchool</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="rsSchool-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="rsSchool:war exploded" />
+    </root>
+  </artifact>
+</component>
