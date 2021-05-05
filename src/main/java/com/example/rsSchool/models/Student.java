@@ -15,6 +15,14 @@ public class Student {
     private Education education;
     public Student() {
     }
+    public Student(String name, String tel, String email,String image) {
+        this.name = name;
+        this.tel = tel;
+        this.email = email;
+        this.image = image;
+
+    }
+
 
     public Student(String name, String tel, String email,String image,Education education) {
         this.name = name;
