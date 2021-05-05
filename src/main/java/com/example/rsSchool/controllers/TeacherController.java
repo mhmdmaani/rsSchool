@@ -72,4 +72,10 @@ public class TeacherController {
         em.getTransaction().commit();
         em.close();
     }
+    public static Teacher fetchLast(){
+        EntityManager em = emf.createEntityManager();
+        Teacher teacher = em.createQuery("SELECT c FROM Teacher c ORDER BY id desc",Teacher.class).getResultList().get(0);
+        em.close();
+        return teacher;
+    }
 }

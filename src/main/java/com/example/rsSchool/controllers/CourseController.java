@@ -1,7 +1,6 @@
 package com.example.rsSchool.controllers;
 
 import com.example.rsSchool.models.Course;
-import com.example.rsSchool.models.Course;
 import com.example.rsSchool.models.Education;
 
 import javax.persistence.EntityManager;
@@ -59,4 +58,11 @@ public class CourseController {
             em.close();
             return Course;
         }
+
+    public static Course fetchLast(){
+        EntityManager em = emf.createEntityManager();
+        Course course = em.createQuery("SELECT c FROM Course c ORDER BY id desc",Course.class).getResultList().get(0);
+        em.close();
+        return course;
+    }
 }

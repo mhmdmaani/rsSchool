@@ -1,5 +1,6 @@
 package com.example.rsSchool.controllers;
 
+import com.example.rsSchool.models.Course;
 import com.example.rsSchool.models.Education;
 import com.example.rsSchool.models.Student;
 
@@ -72,6 +73,10 @@ public class StudentController {
         em.getTransaction().commit();
         em.close();
     }
-
-
+    public static Student fetchLast(){
+        EntityManager em = emf.createEntityManager();
+        Student student = em.createQuery("SELECT c FROM Student c ORDER BY id desc",Student.class).getResultList().get(0);
+        em.close();
+        return student;
+    }
 }
