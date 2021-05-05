@@ -11,6 +11,7 @@ public class Student {
     private String tel;
     private String email;
     private String image;
+
     @ManyToOne
     private Education education;
     public Student() {

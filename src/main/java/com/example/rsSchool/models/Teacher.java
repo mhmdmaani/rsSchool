@@ -39,6 +39,7 @@ public class Teacher {
     public Long getId() {
         return id;
     }
+
     public String getName() {
         return name;
     }
@@ -73,6 +74,7 @@ public class Teacher {
     public void addCourse(Course course){
         this.courses.add(course);
     }
+
     public void removeCourse(Course course){
         this.courses.removeIf(c->c.getId()==course.getId());
     }
