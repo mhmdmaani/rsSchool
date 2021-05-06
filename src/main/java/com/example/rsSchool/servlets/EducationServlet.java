@@ -32,11 +32,19 @@ public class EducationServlet extends HttpServlet {
 
 
         String id = request.getParameter("id");
-        if (id == null) {
+        String searchText = request.getParameter("search");
+        if (id == null && (searchText==null || searchText=="" )) {
+            // fetch all
             List<Education> educations = EducationController.fetchAll();
             String educationsJson = this.gson.toJson(educations);
             out.print(educationsJson);
-        } else {
+        }else if(searchText!=null && searchText!=""){
+            // search
+            List<Education> educations = EducationController.searchByName(searchText);
+            String jsonResult = this.gson.toJson(educations);
+            out.print(jsonResult);
+        }
+        else {
             int eduId = Integer.parseInt(id);
             Education edu = EducationController.fetchById(eduId);
             String jsonResult = this.gson.toJson(edu);

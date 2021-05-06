@@ -2,27 +2,29 @@ package com.example.rsSchool.servlets;
 
 
 import com.example.rsSchool.controllers.CourseController;
+import com.example.rsSchool.controllers.EducationController;
 import com.example.rsSchool.models.Course;
 
+import com.example.rsSchool.models.Education;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(
         name = "CourseServlet",
-        value = {"/Course"}
+        value = {"/course"}
 )
-public class CourseServlet {
+public class CourseServlet extends HttpServlet {
 
         private Gson gson = new Gson();
 
         public CourseServlet (){}
-
             protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
                 PrintWriter out = response.getWriter();
 
@@ -44,15 +46,14 @@ public class CourseServlet {
 
             protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
                 PrintWriter out = response.getWriter();
-
                 String name = request.getParameter("name");
                 String description = request.getParameter("description");
                 String image = request.getParameter("image");
-                String id = request.getParameter("educationId");
-                //CourseController.createCourse(name, description, image);
-                Course cou = CourseController.fetchLast();
+                int educationId = Integer.parseInt(request.getParameter("educationId"));
+                Course course = new Course(name, description, image);
+                EducationController.addCourse(course,educationId);
 
-                String jsonResult = this.gson.toJson(cou);
+                String jsonResult = this.gson.toJson(course);
                 out.print(jsonResult);
                 out.flush();
             }

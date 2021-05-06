@@ -1,10 +1,11 @@
-
 const config = {
     headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
     }
 }
 const url = '/rsSchool-1.0-SNAPSHOT/education';
+const detailsUrl = `/rsSchool-1.0-SNAPSHOT/educationDetails.jsp`;
+
 
 function onLoad() {
 
@@ -14,7 +15,7 @@ function onLoad() {
         .get(url)
         .then((res) => {
 
-           console.log('dt');
+            console.log('dt');
             console.log(res.data);
             res.data.forEach((el) => {
                 addElement(el.id, el.name, el.description, el.image);
@@ -43,7 +44,8 @@ function onCreate() {
         params
     ).then(res=>{
         const {id , name,description,image} = res.data;
-       addElement(id,name,description,image);
+        addElement(id,name,description,image);
+        hideForm();
     })
 }
 
@@ -59,7 +61,23 @@ function onUpdate() {
     ).then(res=>{
         const {id , name,description,image} = res.data;
         addElement(id,name,description,image);
+        hideForm();
     })
+}
+
+function onSearch(){
+    const searchInput = document.getElementById("searchTxt");
+    const searchText = searchInput.value;
+    return axios.get(url,{
+        params:{
+            search:searchText
+        }
+    }).then(res=>{
+        clearContainer();
+        res.data.forEach((el) => {
+            addElement(el.id, el.name, el.description, el.image);
+        });
+    });
 }
 
 function addElement(id, name, description, image) {
@@ -106,19 +124,23 @@ function addElement(id, name, description, image) {
         displayEditForm(id, name, image, description);
     });
 
+    var viewBtn = document.createElement('a');
+    viewBtn.setAttribute('type', 'button');
+    viewBtn.innerHTML="View";
+    viewBtn.classList.add('btn');
+    viewBtn.classList.add('btn-secondary');
+    viewBtn.setAttribute('href',`${detailsUrl}?id=${id}`);
+
     card.appendChild(cardImage);
     cardBody.appendChild(title);
     cardBody.appendChild(descriptionTag);
     cardBody.appendChild(deleteBtn);
     cardBody.appendChild(editBtn);
+    cardBody.appendChild(viewBtn);
     card.appendChild(cardBody);
     container.appendChild(card);
 }
 
-function updateElement(id,name,description,image){
-    const updatedContainer  = document.getElementById(id);
-//    updatedContainer
-}
 
 function displayCreateForm(){
     document.getElementById("formBtn").innerHTML="Create";
@@ -136,4 +158,8 @@ function displayEditForm() {
     document.getElementById("formBtn").addEventListener('click',onUpdate());
     document.getElementById("form").style.display="flex";
 
+}
+
+function clearContainer(){
+    document.getElementById("elements").innerHTML='';
 }

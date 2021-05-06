@@ -1,10 +1,7 @@
 package com.example.rsSchool.models;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +15,7 @@ public class Teacher {
     private String tel;
     private String email;
     private String image;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Course> courses;
 
     public Teacher(String name , String tel,String email,String image) {

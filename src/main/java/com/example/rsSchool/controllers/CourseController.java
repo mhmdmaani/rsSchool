@@ -12,9 +12,9 @@ public class CourseController {
         static EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");
 
 
-        public static void createCourse(String name , String description, String image, Education education){
+        public static void createCourse(String name , String description, String image){
 
-            Course Course = new Course(name,description,education, image);
+            Course Course = new Course(name,description, image);
 
             EntityManager em = emf.createEntityManager();
             em.getTransaction().begin();

@@ -89,4 +89,12 @@ public  class EducationController {
         em.getTransaction().commit();
         em.close();
     }
+
+    public static List<Education> searchByName(String text){
+
+        EntityManager em = emf.createEntityManager();
+        List<Education> educations = em.createNativeQuery("SELECT * FROM Education WHERE Education.name LIKE  :searchText '%'",Education.class).setParameter("searchText",text).getResultList();
+        // em.close();
+        return educations;
+    }
 }

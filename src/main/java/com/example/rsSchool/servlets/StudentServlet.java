@@ -1,8 +1,10 @@
 package com.example.rsSchool.servlets;
 
 
+import com.example.rsSchool.controllers.EducationController;
 import com.example.rsSchool.controllers.StudentController;
 
+import com.example.rsSchool.models.Education;
 import com.example.rsSchool.models.Student;
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -10,6 +12,7 @@ import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
         name = "StudentServlet",
         value = {"/Student"}
 )
-public class StudentServlet {
+public class StudentServlet extends HttpServlet {
     private Gson gson = new Gson();
 
     public StudentServlet() {
@@ -49,10 +52,10 @@ public class StudentServlet {
         String email = request.getParameter("email");
         String tel = request.getParameter("tel");
         String image = request.getParameter("image");
-        String id = request.getParameter("educationId");
-        //StudentController.createStudent(name, email,tel,image,);
+        String educationId = request.getParameter("educationId");
+        Education education = EducationController.fetchById(Integer.parseInt(educationId));
+        StudentController.createStudent(name, email,tel,image,education);
         Student edu = StudentController.fetchLast();
-
 
         String jsonResult = this.gson.toJson(edu);
         out.print(jsonResult);

@@ -10,16 +10,19 @@
 </head>
 <body onload="onLoad()">
 <div class="container">
-    <div class="titleContainer">
-        <h3 class="center">Educations</h3>
+    <div id="detailsPage" class="detailsPage">
+        <div class="imageContainer">
+            <img id="pageImage" class="pageImage" />
+        </div>
+        <div class="detailsInfo">
+        <h3 id="pageTitle" class="center"></h3>
+        <p id="pageDescription" ></p>
+        </div>
     </div>
 
     <!--search container-->
     <div class="searchContainer">
         <div class="row g-3 align-items-center">
-            <div class="col-auto">
-                <label for="searchTxt" class="col-form-label">Password</label>
-            </div>
             <div class="col-auto">
                 <input type="search" id="searchTxt" class="form-control">
             </div>
@@ -30,7 +33,7 @@
     </div>
     <!-- end search btn -->
     <div class="addBtnContainer">
-        <button type="button" class="btn btn-primary"  onclick="displayCreateForm()" >New Education</button>
+        <button type="button" class="btn btn-primary"  onclick="displayCreateForm()" >New Course</button>
     </div>
     <div class="row" id="elements">
         <!-- data -->
@@ -44,7 +47,7 @@
     <div class="formContentContainer">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">New Education</h5>
+                <h5 class="modal-title" id="exampleModalLabel">New Course</h5>
                 <button type="button" class="btn-close" onclick="hideForm();" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -75,6 +78,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="js/educationScript.js"></script>
+<script src="js/educationDetailsScript.js"></script>
 </body>
 </html>

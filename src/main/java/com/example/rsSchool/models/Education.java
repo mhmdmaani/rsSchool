@@ -14,7 +14,7 @@ public class Education {
     private String description;
     private String image;
 
-    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER,cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
     private List<Course> courses;
 
     // default constructor

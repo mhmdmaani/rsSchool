@@ -15,19 +15,13 @@ public class Course {
     private String image;
 
 
-
-    @ManyToOne
-    @JoinColumn(name = "education_id")
-    public Education education;
-
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     public List<Teacher> teachers;
 
 
-    public Course(String name, String description,Education education,String image){
+    public Course(String name, String description,String image){
         this.name=name;
         this.description = description;
-        this.education = education;
         this.image = image;
         this.teachers = new ArrayList<>();
     }
@@ -59,14 +53,6 @@ public class Course {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Education getEducation() {
-        return education;
-    }
-
-    public void setEducation(Education education) {
-        this.education = education;
     }
 
     public List<Teacher> getTeachers() {
