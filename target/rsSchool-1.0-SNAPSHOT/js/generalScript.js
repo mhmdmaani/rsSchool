@@ -54,7 +54,7 @@ function onUpdate() {
     params.append('image', document.getElementById("imageId").value);
     params.append('id', document.getElementById("hiddenId").value);
 
-    return axios.put('/rsSchool-1.0-SNAPSHOT/education',
+    return axios.put(url,
         params
     ).then(res=>{
         const {id , name,description,image} = res.data;
@@ -117,7 +117,7 @@ function addElement(id, name, description, image) {
 
 function updateElement(id,name,description,image){
     const updatedContainer  = document.getElementById(id);
-    updatedContainer
+//    updatedContainer
 }
 
 function displayCreateForm(){
