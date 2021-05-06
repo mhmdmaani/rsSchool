@@ -1,51 +1,73 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
+
 package com.example.rsSchool.servlets;
 
 import com.example.rsSchool.controllers.EducationController;
 import com.example.rsSchool.models.Education;
 import com.google.gson.Gson;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-
-@WebServlet(name = "EducationServlet", value = "/education")
+@WebServlet(
+        name = "EducationServlet",
+        value = {"/education"}
+)
 public class EducationServlet extends HttpServlet {
     private Gson gson = new Gson();
-    @Override
+
+    public EducationServlet() {
+    }
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
 
+
         String id = request.getParameter("id");
-        if(id==null){
-            List<Education> educations =EducationController.fetchAll();
+        if (id == null) {
+            List<Education> educations = EducationController.fetchAll();
             String educationsJson = this.gson.toJson(educations);
             out.print(educationsJson);
-        }else{
+        } else {
             int eduId = Integer.parseInt(id);
             Education edu = EducationController.fetchById(eduId);
             String jsonResult = this.gson.toJson(edu);
             out.print(jsonResult);
         }
+
         out.flush();
     }
 
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
 
         String name = request.getParameter("name");
         String description = request.getParameter("description");
         String image = request.getParameter("image");
+        EducationController.createEducation(name, description, image);
+         Education edu = EducationController.fetchLast();
 
-        EducationController.createEducation(name,description,image);
-        out.print(name+" "+description);
+
+        String jsonResult = this.gson.toJson(edu);
+        out.print(jsonResult);
+        out.flush();
+    }
+
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter out = response.getWriter();
+
+        String id = request.getParameter("id");
+        EducationController.removeEducation(Integer.parseInt(id));
+
+
+        out.flush();
     }
 }
-

@@ -23,6 +23,7 @@ public class Course {
     @ManyToMany
     public List<Teacher> teachers;
 
+
     public Course(String name, String description,Education education,String image){
         this.name=name;
         this.description = description;
@@ -75,6 +76,7 @@ public class Course {
     public void setTeachers(List<Teacher> teachers) {
         this.teachers = teachers;
     }
+
     public void addTeacher(Teacher teacher){
         this.teachers.add(teacher);
     }
