@@ -30,11 +30,20 @@ public class CourseServlet extends HttpServlet {
 
 
                 String id = request.getParameter("id");
-                if (id == null) {
-                    List<Course> Courses = CourseController.fetchAll();
+                String searchText = request.getParameter("search");
+                String educationId = request.getParameter("educationId");
+                if (id == null && (searchText==null || searchText=="")) {
+                    List<Course> Courses = CourseController.fetchByEducation(Integer.parseInt(educationId));
                     String CoursesJson = this.gson.toJson(Courses);
                     out.print(CoursesJson);
-                } else {
+
+                }else if(searchText!=null && searchText!="" ){
+                    // search
+                    List<Course> courses = CourseController.searchByName(searchText,Integer.parseInt(educationId));
+                    String jsonResult = this.gson.toJson(courses);
+                    out.print(jsonResult);
+                }
+                else {
                     int eduId = Integer.parseInt(id);
                     Course edu = CourseController.fetchById(eduId);
                     String jsonResult = this.gson.toJson(edu);
@@ -50,11 +59,17 @@ public class CourseServlet extends HttpServlet {
                 String description = request.getParameter("description");
                 String image = request.getParameter("image");
                 int educationId = Integer.parseInt(request.getParameter("educationId"));
-                Course course = new Course(name, description, image);
-                EducationController.addCourse(course,educationId);
-
-                String jsonResult = this.gson.toJson(course);
-                out.print(jsonResult);
+                String id = request.getParameter("id");
+                if(id==null || id==""){
+                    Course course = new Course(name, description, image);
+                    EducationController.addCourse(course,educationId);
+                    String jsonResult = this.gson.toJson(course);
+                    out.print(jsonResult);
+                }else{
+                    CourseController.updateCourse(Integer.parseInt(id),name,description,image);
+                    String jsonResult = this.gson.toJson(id);
+                    out.print(jsonResult);
+                }
                 out.flush();
             }
 
@@ -62,8 +77,8 @@ public class CourseServlet extends HttpServlet {
                 PrintWriter out = response.getWriter();
 
                 String id = request.getParameter("id");
-                CourseController.removeCourse(Integer.parseInt(id));
-
+                String educationId = request.getParameter("educationId");
+                EducationController.removeCourse(Integer.parseInt(id),Integer.parseInt(educationId));
 
                 out.flush();
             }

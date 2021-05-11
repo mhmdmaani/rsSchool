@@ -8,7 +8,10 @@ package com.example.rsSchool.servlets;
 import com.example.rsSchool.controllers.EducationController;
 import com.example.rsSchool.models.Education;
 import com.google.gson.Gson;
+
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -47,6 +50,7 @@ public class EducationServlet extends HttpServlet {
         else {
             int eduId = Integer.parseInt(id);
             Education edu = EducationController.fetchById(eduId);
+
             String jsonResult = this.gson.toJson(edu);
             out.print(jsonResult);
         }
@@ -60,12 +64,18 @@ public class EducationServlet extends HttpServlet {
         String name = request.getParameter("name");
         String description = request.getParameter("description");
         String image = request.getParameter("image");
-        EducationController.createEducation(name, description, image);
-         Education edu = EducationController.fetchLast();
+        String id = request.getParameter("educationId");
+        if(id==null|| id==""){
+           Education inserted = EducationController.createEducation(name, description, image);
+           String jsonResult = this.gson.toJson(inserted);
+            out.print(jsonResult);
+        }else{
+            int educationId =Integer.parseInt(id);
+            EducationController.updateEducation(educationId,name, description, image);
+            String jsonResult = this.gson.toJson(educationId);
+            out.print(jsonResult);
+        }
 
-
-        String jsonResult = this.gson.toJson(edu);
-        out.print(jsonResult);
         out.flush();
     }
 
@@ -74,8 +84,6 @@ public class EducationServlet extends HttpServlet {
 
         String id = request.getParameter("id");
         EducationController.removeEducation(Integer.parseInt(id));
-
-
         out.flush();
     }
 }

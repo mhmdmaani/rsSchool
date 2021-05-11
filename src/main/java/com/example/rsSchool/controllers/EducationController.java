@@ -1,6 +1,9 @@
 package com.example.rsSchool.controllers;
 import com.example.rsSchool.models.Course;
 import com.example.rsSchool.models.Education;
+import com.example.rsSchool.models.Student;
+import org.hibernate.annotations.QueryHints;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -12,13 +15,14 @@ public  class EducationController {
     static EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");
 
 
-    public static void createEducation(String name , String description,String image){
+    public static Education createEducation(String name , String description,String image){
         EntityManager em = emf.createEntityManager();
         Education education = new Education(name,description,image);
         em.getTransaction().begin();
         em.persist(education);
         em.getTransaction().commit();
         em.close();
+        return education;
     }
     public static void updateEducation(int id,String name,String description,String image){
         EntityManager em = emf.createEntityManager();
@@ -59,7 +63,7 @@ public  class EducationController {
 
     public static Education fetchLast(){
         EntityManager em = emf.createEntityManager();
-        Education education = em.createQuery("SELECT c FROM Education c ORDER BY id desc",Education.class).getResultList().get(0);
+        Education education = em.createQuery("SELECT c FROM Education c ORDER BY id desc",Education.class).setHint(QueryHints.PASS_DISTINCT_THROUGH, false).getResultList().get(0);
         em.close();
         return education;
     }
@@ -69,11 +73,10 @@ public  class EducationController {
     public static void addCourse(Course course,int educationId ){
         EntityManager em = emf.createEntityManager();
         Education education = em.find(Education.class,educationId);
-
         em.getTransaction().begin();
 
-        education.addCourse(course);
-
+       course.setEducation(education);
+        em.persist(course);
         em.getTransaction().commit();
         em.close();
     }
@@ -84,7 +87,31 @@ public  class EducationController {
         Course course = em.find(Course.class,courseId);
         em.getTransaction().begin();
 
-        education.removeCourse(course);
+        em.remove(course);
+
+        em.getTransaction().commit();
+        em.close();
+    }
+
+    public static void addStudent(Student student, int educationId ){
+        EntityManager em = emf.createEntityManager();
+        Education education = em.find(Education.class,educationId);
+
+        em.getTransaction().begin();
+
+       student.setEducation(education);
+       em.persist(student);
+        em.getTransaction().commit();
+        em.close();
+    }
+
+    public static  void removeStudent(int studentId,int educationId){
+        EntityManager em = emf.createEntityManager();
+        Education education = em.find(Education.class,educationId);
+        Student student = em.find(Student.class,studentId);
+        em.getTransaction().begin();
+
+        student.setEducation(null);
 
         em.getTransaction().commit();
         em.close();

@@ -16,7 +16,7 @@ public class StudentController {
 
     public static void createStudent(String name , String email , String tel , String image, Education education){
 
-        Student Student = new Student(name,email,tel,image,education);
+        Student Student = new Student(name,email,tel,image);
 
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -24,16 +24,14 @@ public class StudentController {
         em.getTransaction().commit();
         em.close();
     }
-    public static void updateStudent(int id,String name , String email , String tel , String image, Education education){
+    public static void updateStudent(int id,String name , String email , String tel , String image){
         EntityManager em = emf.createEntityManager();
         Student student = em.find(Student.class,id);
         em.getTransaction().begin();
-
         student.setName(name);
         student.setEmail(email);
         student.setTel(tel);
         student.setImage(image);
-        student.setEducation(education);
         em.getTransaction().commit();
         em.close();
     }
@@ -62,21 +60,24 @@ public class StudentController {
         em.close();
         return student;
     }
-
-    public static void setEducation(int studentId, int educationId){
-        EntityManager em = emf.createEntityManager();
-        Student student = em.find(Student.class,studentId);
-        Education education = em.find(Education.class,educationId);
-
-        em.getTransaction().begin();
-        student.setEducation(education);
-        em.getTransaction().commit();
-        em.close();
-    }
     public static Student fetchLast(){
         EntityManager em = emf.createEntityManager();
         Student student = em.createQuery("SELECT c FROM Student c ORDER BY id desc",Student.class).getResultList().get(0);
         em.close();
         return student;
     }
+    public static  List<Student> fetchByEducation(int educationId){
+        EntityManager em = emf.createEntityManager();
+        List<Student> Student = em.createQuery("SELECT c from Student c where c.education.id=:educationId", Student.class).setParameter("educationId",educationId).getResultList();
+        em.close();
+        return Student;
+    }
+
+    public static List<Student> searchByName(String text , int educationId){
+        EntityManager em = emf.createEntityManager();
+        List<Student> students = em.createQuery("SELECT c FROM Student c  WHERE c.name  LIKE :searchText AND c.education.id=:educationId",Student.class).setParameter("searchText",text+"%").setParameter("educationId",educationId).getResultList();
+        em.close();
+        return students;
+    }
+
 }

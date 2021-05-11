@@ -16,10 +16,7 @@
 
     <!--search container-->
     <div class="searchContainer">
-        <div class="row g-3 align-items-center">
-            <div class="col-auto">
-                <label for="searchTxt" class="col-form-label">Password</label>
-            </div>
+        <div class="row g-3 align-items-center" style="float: right">
             <div class="col-auto">
                 <input type="search" id="searchTxt" class="form-control">
             </div>
@@ -44,7 +41,7 @@
     <div class="formContentContainer">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">New Education</h5>
+                <h5 class="modal-title" id="formTitle">New Education</h5>
                 <button type="button" class="btn-close" onclick="hideForm();" aria-label="Close"></button>
             </div>
             <div class="modal-body">

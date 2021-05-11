@@ -11,7 +11,6 @@
         <class>com.example.rsSchool.models.Course</class>
         <class>com.example.rsSchool.models.Teacher</class>
         <class>com.example.rsSchool.models.Student</class>
-
             <properties>
                 <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
                 <property name="javax.persistence.jdbc.url"
@@ -21,9 +20,7 @@
                           value="mhmd19881988" />
                 <property name="hibernate.show_sql" value="true" />
                 <property name="hibernate.hbm2ddl.auto" value="update"/>
-
-
-
+                <property name="current_session_context_class" value="thread" />
     </properties>
     </persistence-unit>
 </persistence>

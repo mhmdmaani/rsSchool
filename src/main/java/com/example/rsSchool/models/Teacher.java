@@ -15,7 +15,7 @@ public class Teacher {
     private String tel;
     private String email;
     private String image;
-    @ManyToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Course> courses;
 
     public Teacher(String name , String tel,String email,String image) {

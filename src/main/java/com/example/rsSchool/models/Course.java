@@ -1,6 +1,9 @@
 package com.example.rsSchool.models;
 
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,22 +17,24 @@ public class Course {
     private String description;
     private String image;
 
+    @ManyToOne
+    @JoinColumn(name="education_id")
+    Education education;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER)
     public List<Teacher> teachers;
-
 
     public Course(String name, String description,String image){
         this.name=name;
         this.description = description;
         this.image = image;
         this.teachers = new ArrayList<>();
+        this.education  = new Education();
     }
     public Course(){
         this.teachers = new ArrayList<>();
+        this.education = new Education();
     }
-
-
 
     public void setId(int id) {
         this.id = id;
@@ -77,5 +82,13 @@ public class Course {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public Education getEducation() {
+        return education;
+    }
+
+    public void setEducation(Education education) {
+        this.education = education;
     }
 }

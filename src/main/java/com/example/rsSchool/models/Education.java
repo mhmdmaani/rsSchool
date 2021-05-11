@@ -1,6 +1,9 @@
 package com.example.rsSchool.models;
 
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,12 +17,8 @@ public class Education {
     private String description;
     private String image;
 
-    @OneToMany(fetch = FetchType.EAGER,cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
-    private List<Course> courses;
-
     // default constructor
     public Education() {
-        this.courses = new ArrayList<>();
     }
 
     // constructor
@@ -27,7 +26,6 @@ public class Education {
         this.name = name;
         this.description = description;
         this.image = image;
-        this.courses = new ArrayList<>();
     }
 
     public void setId(int id) {
@@ -55,21 +53,6 @@ public class Education {
         this.description = description;
     }
 
-    public List<Course> getCourses() {
-        return courses;
-    }
-
-    public void setCourses(List<Course> courses) {
-        this.courses = courses;
-    }
-
-    public void addCourse(Course course) {
-        this.courses.add(course);
-    }
-
-    public void removeCourse(Course course){
-        this.courses.removeIf(c->c.getId()==course.getId());
-    }
 
     public String getImage() {
         return image;
@@ -78,4 +61,5 @@ public class Education {
     public void setImage(String image) {
         this.image = image;
     }
+
 }

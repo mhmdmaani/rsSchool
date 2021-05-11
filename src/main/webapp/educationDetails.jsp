@@ -20,9 +20,11 @@
         </div>
     </div>
 
+    <div class="borderedContainer">
+        <h6 class="center">Courses:</h6>
     <!--search container-->
     <div class="searchContainer">
-        <div class="row g-3 align-items-center">
+        <div class="row g-3 align-items-center" style="float: right">
             <div class="col-auto">
                 <input type="search" id="searchTxt" class="form-control">
             </div>
@@ -38,7 +40,36 @@
     <div class="row" id="elements">
         <!-- data -->
     </div>
+    </div>
+
+
+
+<div class="borderedContainer">
+    <h6 class="center">Students:</h6>
+    <!--search container-->
+    <div class="searchContainer">
+        <div class="row g-3 align-items-center" style="float: right">
+            <div class="col-auto">
+                <input type="search" id="searchStudentTxt" class="form-control">
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-primary" onclick="onSearchStudent()">Search</button>
+            </div>
+        </div>
+    </div>
+    <!-- end search btn -->
+    <div class="addBtnContainer">
+        <button type="button" class="btn btn-primary"  onclick="displayCreateStudentForm()" >New Student</button>
+    </div>
+    <div class="row" id="students">
+        <!-- data -->
+    </div>
 </div>
+</div>
+
+
+</div>
+
 
 <!-- display form -->
 <!-- Modal -->
@@ -47,7 +78,7 @@
     <div class="formContentContainer">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">New Course</h5>
+                <h5 class="modal-title" id="formTitle">New Course</h5>
                 <button type="button" class="btn-close" onclick="hideForm();" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -74,6 +105,45 @@
     </div>
 </div>
 
+
+
+
+<!-- student form -->
+
+<div id="studentForm"  >
+    <div class="formContentContainer">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="studentFormTitle">New Student</h5>
+                <button type="button" class="btn-close" onclick="hideStudentForm();" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="hiddenStudentId" />
+                <div class="mb-3">
+                    <label for="nameId" class="col-form-label">Name:</label>
+                    <input type="text" name="name" class="form-control" id="studentNameId">
+                </div>
+                <div class="mb-3">
+                    <label for="telId" class="col-form-label">Telephone:</label>
+                    <input type="tel" name="tel" class="form-control" id="telId">
+                </div>
+                <div class="mb-3">
+                    <label for="telId" class="col-form-label">Email:</label>
+                    <input type="tel" name="tel" class="form-control" id="emailId">
+                </div>
+                <div class="mb-3">
+                    <label for="imageId" class="col-form-label">image:</label>
+                    <input type="text" name="image" class="form-control" id="studentImageId">
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="hideStudentForm()" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button"  id="formStudentBtn" class="btn btn-primary">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
