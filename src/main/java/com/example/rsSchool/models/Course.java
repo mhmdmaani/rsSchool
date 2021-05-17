@@ -7,6 +7,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Course {
@@ -21,7 +22,11 @@ public class Course {
     @JoinColumn(name="education_id")
     Education education;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "course_taacher",
+            joinColumns = {@JoinColumn(name = "course_id")},
+            inverseJoinColumns = {@JoinColumn(name = "teacher_id")})
     public List<Teacher> teachers;
 
     public Course(String name, String description,String image){

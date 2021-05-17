@@ -9,6 +9,9 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body onload="onLoad()">
+<jsp:include page="header.jsp"></jsp:include>
+
+
 <div class="container">
     <div id="detailsPage" class="detailsPage">
         <div class="imageContainer">
@@ -145,7 +148,7 @@
     </div>
 </div>
 
-
+<jsp:include page="footer.jsp"></jsp:include>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="js/educationDetailsScript.js"></script>

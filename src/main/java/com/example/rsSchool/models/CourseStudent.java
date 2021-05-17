@@ -2,6 +2,7 @@ package com.example.rsSchool.models;
 
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity(name="CourseStudent")
@@ -10,11 +11,11 @@ public class CourseStudent {
     @EmbeddedId
     private CourseStudentId id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @MapsId("courseId")
     private Course course;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @MapsId("studentId")
     private Student student;
 

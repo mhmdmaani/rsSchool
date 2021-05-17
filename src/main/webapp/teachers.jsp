@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Educations</title>
+    <title>Students</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
@@ -15,11 +15,11 @@
 
 <div class="container">
     <div class="titleContainer">
-        <h3 class="center">Educations</h3>
+        <h3 class="center">Teachers</h3>
     </div>
 
     <!--search container-->
-    <div class="searchContainer">
+    <div class="searchContainer" style="width: 100%; height: 50px">
         <div class="row g-3 align-items-center" style="float: right">
             <div class="col-auto">
                 <input type="search" id="searchTxt" class="form-control">
@@ -29,10 +29,11 @@
             </div>
         </div>
     </div>
-    <!-- end search btn -->
     <div class="addBtnContainer">
-        <button type="button" class="btn btn-primary"  onclick="displayCreateForm()" >New Education</button>
+        <button type="button" class="btn btn-primary"  onclick="displayCreateForm()" >New Teacher</button>
     </div>
+
+    <!-- end search btn -->
     <div class="row" id="elements">
         <!-- data -->
     </div>
@@ -45,22 +46,26 @@
     <div class="formContentContainer">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="formTitle">New Education</h5>
+                <h5 class="modal-title" id="formTitle">New Teacher</h5>
                 <button type="button" class="btn-close" onclick="hideForm();" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <input type="hidden" id="hiddenId" />
                 <div class="mb-3">
-                    <label for="nameId" class="col-form-label">Name:</label>
-                    <input type="text" name="name" class="form-control" id="nameId">
+                    <label for="name" class="col-form-label">Name:</label>
+                    <input type="text" name="name" class="form-control" id="name">
                 </div>
                 <div class="mb-3">
-                    <label for="descriptionText" class="col-form-label">Description:</label>
-                    <textarea name="description" class="form-control" id="descriptionText"></textarea>
+                    <label for="email" class="col-form-label">Email:</label>
+                    <input type="text" name="email" class="form-control" id="email">
                 </div>
                 <div class="mb-3">
-                    <label for="imageId" class="col-form-label">image:</label>
-                    <input type="text" name="image" class="form-control" id="imageId">
+                    <label for="tel" class="col-form-label">tel:</label>
+                    <input type="text" name="tel" class="form-control" id="tel">
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="col-form-label">image:</label>
+                    <input type="text" name="image" class="form-control" id="image">
                 </div>
 
             </div>
@@ -72,10 +77,10 @@
     </div>
 </div>
 
-<jsp:include page="footer.jsp"></jsp:include>
 
+<jsp:include page="footer.jsp"></jsp:include>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="js/educationScript.js"></script>
+<script src="js/teachersScript.js"></script>
 </body>
 </html>

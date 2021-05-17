@@ -9,31 +9,29 @@ import java.util.List;
 public class Teacher {
     @Id
     @GeneratedValue
-    private Long id;
+    private int id;
 
     private String name;
     private String tel;
     private String email;
     private String image;
-    @OneToMany(fetch = FetchType.EAGER)
-    private List<Course> courses;
+
 
     public Teacher(String name , String tel,String email,String image) {
         this.name=name;
         this.tel = tel;
         this.email = email;
         this.image = image;
-        this.courses = new ArrayList<>();
     }
 
     public Teacher(){
-      this.courses = new ArrayList<>();
+
     }
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
@@ -59,21 +57,6 @@ public class Teacher {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public List<Course> getCourses() {
-        return courses;
-    }
-
-    public void setCourses(List<Course> courses) {
-        this.courses = courses;
-    }
-    public void addCourse(Course course){
-        this.courses.add(course);
-    }
-
-    public void removeCourse(Course course){
-        this.courses.removeIf(c->c.getId()==course.getId());
     }
 
     public String getImage() {

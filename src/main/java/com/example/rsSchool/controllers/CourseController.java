@@ -5,7 +5,9 @@ import com.example.rsSchool.models.*;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import java.util.List;
+import java.util.Set;
 
 public class CourseController {
         static EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");
@@ -88,12 +90,12 @@ public class CourseController {
         return students;
     }
 
-    public static  List<CourseStudent> fetchCourseStudents(int courseId){
+    public static List<CourseStudent> fetchCourseStudents(int courseId){
         EntityManager em = emf.createEntityManager();
-        Course course = em.find(Course.class,courseId);
-        List<CourseStudent> students = em.createQuery("SELECT c FROM  CourseStudent c WHERE c.course.id=:courseId", CourseStudent.class).setParameter("courseId",CourseStudent.class).getResultList();
+        List<CourseStudent> courseStudents = em.createQuery("SELECT c FROM CourseStudent c WHERE c.course.id=:courseId",CourseStudent.class).setParameter("courseId",courseId).getResultList();
+        System.out.println(courseStudents);
         em.close();
-        return students;
+        return courseStudents;
     }
 
 
@@ -104,7 +106,47 @@ public class CourseController {
         CourseStudent courseStudent = new CourseStudent(course,student,degree);
         em.getTransaction().begin();
         em.persist(courseStudent);
-
+        em.getTransaction().commit();
+        em.close();
         return courseStudent;
+    }
+
+    public static void removeCourseStudent(int courseId,int studentId){
+        EntityManager em = emf.createEntityManager();
+
+        CourseStudent courseStudent =em.createQuery("SELECT c FROM CourseStudent c where c.course.id=:courseId AND c.student.id=:studentId ",CourseStudent.class)
+                .setParameter("courseId",courseId).setParameter("studentId",studentId).getSingleResult();
+        em.getTransaction().begin();
+        em.remove(courseStudent);
+        em.getTransaction().commit();
+        em.close();
+    }
+
+    public  static List<CourseStudent> searchStudentByName(String search,int courseId){
+        EntityManager em = emf.createEntityManager();
+        List<CourseStudent> courses = em.createQuery("SELECT c FROM CourseStudent c  WHERE c.student.name  LIKE :searchText AND c.course.id=:courseId",CourseStudent.class).setParameter("searchText",search+"%").setParameter("courseId",courseId).getResultList();
+        em.close();
+        return courses;
+    }
+
+    public static void addTeacher(int courseId,int teacherId){
+        EntityManager em = emf.createEntityManager();
+        Course course = em.find(Course.class,courseId);
+        Teacher teacher = em.find(Teacher.class,teacherId);
+
+        em.getTransaction().begin();
+        course.addTeacher(teacher);
+        em.getTransaction().commit();
+        em.close();
+    }
+    public static void removeTeacher(int courseId,int teacherId){
+        EntityManager em = emf.createEntityManager();
+        Course course = em.find(Course.class,courseId);
+        Teacher teacher = em.find(Teacher.class,teacherId);
+
+        em.getTransaction().begin();
+        course.removeTeacher(teacher);
+        em.getTransaction().commit();
+        em.close();
     }
 }

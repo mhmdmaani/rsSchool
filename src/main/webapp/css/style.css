@@ -1,5 +1,9 @@
+body{
+    padding-bottom: 150px;
+}
 .container{
     padding-top: 20px;
+    margin-bottom: 50px;
 }
 .modal{
     display: block;
@@ -46,7 +50,7 @@
 }
 
 .borderedContainer{
-    border:1px solid #3c3c3c50;
+    border-bottom:1px dashed #3c3c3c50;
     padding:5px;
     margin:10px;
 }
@@ -71,6 +75,16 @@
     justify-content: center;
     align-items: center;
 }
+#teachersListForm{
+    position:fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background: #33333350;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
 .radioBtnContainer{
     overflow: auto;
 }
@@ -83,4 +97,118 @@
     width: auto;
     height: 50px;
     border-radius: 50%;
+}
+.list-group-item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 1em;
+    padding-right: 1em;
+    margin: auto;
+    width: 90%;
+}
+#students{
+    padding-left: 1em;
+}
+.courseStudentImg{
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+}
+.success{
+    border:1px solid #4CAF50;
+    border-radius: 10px;
+}
+.SucessstudentDegree{
+    color: #7de91e;
+}
+.fail{
+    border:1px solid #E91E63;
+    border-radius: 10px;
+}
+.progress{
+    min-width: 100px;
+}
+.studentName{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.listItem{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+.infoCont{
+    width: 75%;
+}
+.mainCard{
+    text-align: center;
+    margin:5px auto;
+}
+.homeStudentImage{
+    width:50px;
+    height: auto;
+}
+.teacherItemContainer{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+.teacherImage{
+    width: 100px;
+    border-radius: 50%;
+    height: 100px;
+}
+.teacherName{
+    text-align: center;
+    font-size: 12px;
+}
+.footer{
+    position: fixed;
+    bottom: 0;
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background: #693250;
+    flex-direction: column;
+}
+.header{
+    top: 0;
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background: #693250;
+    flex-direction: row;
+}
+.headerTitle{
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 200;
+}
+.header-left{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.header-link{
+    color: #ffffff;
+    margin: 0 10px;
+    text-decoration: none;
+}
+.header-link:hover{
+    color: #f0f0f0;
+}
+.copyright{
+    font-size: 10px;
+    color: #ffffff;
+    font-weight: 100;
 }
